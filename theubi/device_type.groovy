@@ -31,6 +31,11 @@ metadata {
 		// TODO: define status and reply messages here
 	}
     
+    preferences {
+    	 input "tempPref", "bool", title: "Fahrenheit",
+              description: "Temp meausurements in Fahrenheit.", defaultValue: true,
+              required: false, displayDuringSetup: true
+    }
 
 	tiles {
 		valueTile("temperature", "device.temperature", width: 1, height: 1, canChangeIcon: false) {
@@ -117,7 +122,11 @@ def parseEvents(results) {
 }
 
 def cToF(temp) {
-	return temp * 1.8 + 32
+	if (settings.tempPref){ 
+		return temp * 1.8 + 32
+    }else{ 
+    	return temp
+    }
 }
 
 
