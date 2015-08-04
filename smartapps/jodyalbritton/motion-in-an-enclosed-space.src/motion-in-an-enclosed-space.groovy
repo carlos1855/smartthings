@@ -18,6 +18,8 @@
  * Change Log:
  * Added Credit: Code base from the Notify me When SmartApp. 
  */
+ 
+ 
 definition(
     name: "Motion in an Enclosed Space",
     namespace: "jodyalbritton",
