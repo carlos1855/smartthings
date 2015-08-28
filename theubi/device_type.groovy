@@ -15,14 +15,14 @@
  */
 metadata {
 	definition (name: "Ubi", namespace: "jodyalbritton", author: "jody albritton") {
-		capability "Refresh"
-   		capability "Polling"
+	capability "Refresh"
+   	capability "Polling"
         capability "Temperature Measurement"
         capability "Relative Humidity Measurement"
         capability "Sensor"
         capability "Illuminance Measurement"
         capability "Speech Synthesis"
-        
+      
         attribute "soundlevel", "enum"
 		attribute "airpressure", "enum"
 	}
@@ -32,21 +32,37 @@ metadata {
 	}
     
     preferences {
-    	 input "tempPref", "bool", title: "Fahrenheit",
-              description: "Temp meausurements in Fahrenheit.", defaultValue: true,
+    	 input "tempPref", "bool", title: "Farenheit",
+              description: "Temp meausurements in Farenheit.", defaultValue: true,
               required: false, displayDuringSetup: true
     }
-
+	
+  
+    
+    
 	tiles {
 		valueTile("temperature", "device.temperature", width: 1, height: 1, canChangeIcon: false) {
-            state("temperature", label: '${currentValue}°${unit}', unit:"F", backgroundColors: [
-                    [value: 31, color: "#153591"],
-                    [value: 44, color: "#1e9cbb"],
-                    [value: 59, color: "#90d2a7"],
-                    [value: 74, color: "#44b621"],
-                    [value: 84, color: "#f1d801"],
-                    [value: 95, color: "#d04e00"],
-                    [value: 96, color: "#bc2323"]
+        	
+            	state("temperature", label: '${currentValue}°', unit:units, backgroundColors: [
+                
+                // Celsius Color Range 
+                [value: 0, color: "#153591"],
+				[value: 7, color: "#1e9cbb"],
+				[value: 15, color: "#90d2a7"],
+				[value: 23, color: "#44b621"],
+				[value: 29, color: "#f1d801"],
+				[value: 33, color: "#d04e00"],
+				[value: 36, color: "#bc2323"],
+				// Fahrenheit Color Range
+				[value: 40, color: "#153591"],
+				[value: 44, color: "#1e9cbb"],
+				[value: 59, color: "#90d2a7"],
+				[value: 74, color: "#44b621"],
+				[value: 84, color: "#f1d801"],
+				[value: 92, color: "#d04e00"],
+				[value: 96, color: "#bc2323"]
+                
+                
                 ]
             )
         }
@@ -121,11 +137,16 @@ def parseEvents(results) {
         
 }
 
+
+  
+def units = ""        
 def cToF(temp) {
 	if (settings.tempPref){ 
 		return temp * 1.8 + 32
+        units = "F"
     }else{ 
     	return temp
+        units = "C"
     }
 }
 
