@@ -32,8 +32,8 @@ metadata {
 	}
     
     preferences {
-    	 input "tempPref", "bool", title: "Farenheit",
-              description: "Temp meausurements in Farenheit.", defaultValue: true,
+    	 input "tempPref", "bool", title: "Fahrenheit",
+              description: "Temp meausurements in Fahrenheit.", defaultValue: true,
               required: false, displayDuringSetup: true
     }
 	
